@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { GraduationCap, Users, Award, Target, Eye, Heart, Calendar } from 'lucide-react';
+import { GraduationCap, Users, Award, Target, Eye, Heart, Calendar, Flag } from 'lucide-react';
 
 const About = () => {
   const timeline = [
@@ -129,37 +129,48 @@ const About = () => {
             </p>
           </div>
 
-          <div className="space-y-8">
-            {timeline.map((item, index) => (
-              <div 
-                key={index} 
-                className={`flex items-center animate-fade-in ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className={`flex-1 ${index % 2 === 0 ? 'text-right pr-8' : 'text-left pl-8'}`}>
-                  <Card>
-                    <CardHeader>
-                      <div className="flex items-center space-x-3">
-                        <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center">
-                          <item.icon className="h-6 w-6 text-primary" />
+          <div className="relative max-w-4xl mx-auto">
+            {/* Center line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary via-primary/60 to-primary"></div>
+            
+            <div className="space-y-12">
+              {timeline.map((item, index) => (
+                <div 
+                  key={index} 
+                  className={`relative flex items-center animate-fade-in ${
+                    index % 2 === 0 ? 'justify-start' : 'justify-end'
+                  }`}
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                >
+                  {/* Timeline card */}
+                  <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8' : 'pl-8'}`}>
+                    <Card className="hover-scale transition-all duration-300 hover:shadow-lg">
+                      <CardHeader>
+                        <div className="flex items-center space-x-3">
+                          <div className="bg-primary/10 w-12 h-12 rounded-full flex items-center justify-center">
+                            <item.icon className="h-6 w-6 text-primary" />
+                          </div>
+                          <div>
+                            <CardTitle className="text-xl">{item.title}</CardTitle>
+                            <p className="text-sm text-primary font-semibold">{item.year}</p>
+                          </div>
                         </div>
-                        <div>
-                          <CardTitle className="text-xl">{item.title}</CardTitle>
-                          <p className="text-sm text-primary font-semibold">{item.year}</p>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-600">{item.description}</p>
-                    </CardContent>
-                  </Card>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-600">{item.description}</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  
+                  {/* Center flag icon */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 z-10">
+                    <div className="bg-white border-4 border-primary rounded-full p-3 shadow-lg animate-pulse">
+                      <Flag className="h-6 w-6 text-primary" />
+                    </div>
+                  </div>
                 </div>
-                <div className="flex-shrink-0">
-                  <div className="w-4 h-4 bg-primary rounded-full border-4 border-white shadow-lg"></div>
-                </div>
-                <div className="flex-1"></div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
