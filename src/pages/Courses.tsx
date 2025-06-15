@@ -1,10 +1,10 @@
-
 import { useState, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import CourseCard from '@/components/CourseCard';
+import FAQ from '@/components/FAQ';
 import { courses } from '@/data/courses';
 import { Search, Filter, X } from 'lucide-react';
 
@@ -53,14 +53,41 @@ const Courses = () => {
   const availableCount = courses.filter(c => c.available).length;
   const unavailableCount = courses.filter(c => !c.available).length;
 
+  const coursesFAQs = [
+    {
+      question: 'How do I enroll in a course?',
+      answer: 'You can enroll by visiting our Admissions page, filling out the application form, and selecting your desired course. Our admissions team will contact you within 24 hours to guide you through the process.'
+    },
+    {
+      question: 'What are the prerequisites for tech courses?',
+      answer: 'Most tech courses require basic computer knowledge and at least matriculation level education. Specific requirements vary by course - Graphics Design needs creative aptitude, while Web Development benefits from basic programming understanding.'
+    },
+    {
+      question: 'Are online classes available?',
+      answer: 'We offer hybrid learning options with both in-person and online components. Some theoretical portions can be attended online, while practical sessions require physical presence in our labs.'
+    },
+    {
+      question: 'What certification do I receive upon completion?',
+      answer: 'You receive industry-recognized certificates. Tech courses provide skill-based certificates, while Safety courses (IOSH, NEBOSH) provide international certifications recognized globally.'
+    },
+    {
+      question: 'Do you provide job placement assistance?',
+      answer: 'Yes, we have a dedicated placement cell that helps students with job placement, resume building, interview preparation, and connecting with industry partners.'
+    },
+    {
+      question: 'What is the duration of courses?',
+      answer: 'Course duration varies: Tech courses range from 2-6 months, Safety courses are typically 1-3 months, and Government courses (when available) can be 1-3 years depending on the program.'
+    }
+  ];
+
   return (
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Our Courses</h1>
+        <div className="text-center mb-12 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 gradient-text">Our Courses</h1>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto zoom-in">
             Explore our comprehensive range of technical and safety courses designed to boost your career prospects.
           </p>
         </div>
@@ -203,18 +230,25 @@ const Courses = () => {
           </div>
         )}
 
+        {/* FAQ Section */}
+        <FAQ 
+          title="Frequently Asked Questions"
+          subtitle="Common questions about our courses and enrollment process"
+          faqs={coursesFAQs}
+        />
+
         {/* Call to Action */}
         <div className="text-center mt-16">
-          <div className="bg-primary/5 rounded-lg p-8">
+          <div className="bg-primary/5 rounded-lg p-8 card-hover hover:shadow-lg transition-all duration-300">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Can't find what you're looking for?</h2>
             <p className="text-gray-600 mb-6">
               Contact us to discuss custom training programs or get more information about upcoming courses.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="hover-glow">
                 <a href="/contact">Contact Us</a>
               </Button>
-              <Button asChild variant="outline" size="lg">
+              <Button asChild variant="outline" size="lg" className="hover-glow">
                 <a href="/admissions">Apply for Available Courses</a>
               </Button>
             </div>

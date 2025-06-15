@@ -62,10 +62,10 @@ const About = () => {
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About Jhang Polytechnic Institute</h1>
+        <div className="text-center mb-16 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 gradient-text">About Jhang Polytechnic Institute</h1>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto zoom-in">
             Empowering futures through skill-based education since 1998. We are committed to providing quality technical 
             education that prepares students for successful careers in the modern workplace.
           </p>
@@ -73,9 +73,9 @@ const About = () => {
 
         {/* Mission, Vision, Values */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          <Card className="animate-fade-in">
+          <Card className="animate-fade-in card-hover hover:shadow-2xl hover:border-primary/30 transition-all duration-500">
             <CardHeader className="text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                 <Target className="h-8 w-8 text-primary" />
               </div>
               <CardTitle className="text-2xl">Our Mission</CardTitle>
@@ -88,9 +88,9 @@ const About = () => {
             </CardContent>
           </Card>
 
-          <Card className="animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <Card className="animate-fade-in card-hover hover:shadow-2xl hover:border-primary/30 transition-all duration-500" style={{ animationDelay: '0.1s' }}>
             <CardHeader className="text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                 <Eye className="h-8 w-8 text-primary" />
               </div>
               <CardTitle className="text-2xl">Our Vision</CardTitle>
@@ -103,9 +103,9 @@ const About = () => {
             </CardContent>
           </Card>
 
-          <Card className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <Card className="animate-fade-in card-hover hover:shadow-2xl hover:border-primary/30 transition-all duration-500" style={{ animationDelay: '0.2s' }}>
             <CardHeader className="text-center">
-              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
                 <Heart className="h-8 w-8 text-primary" />
               </div>
               <CardTitle className="text-2xl">Our Values</CardTitle>
@@ -185,14 +185,14 @@ const About = () => {
             <div className="animate-fade-in">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Private Courses - Available Year-Round</h3>
               <div className="space-y-4">
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-3 card-hover p-4 rounded-lg transition-all duration-300 hover:bg-green-50">
                   <div className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Tech</div>
                   <div>
                     <h4 className="font-semibold">Technology Courses</h4>
                     <p className="text-gray-600 text-sm">Graphics Design, Web Development, Digital Marketing, Mobile App Development</p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-3 card-hover p-4 rounded-lg transition-all duration-300 hover:bg-blue-50">
                   <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Safety</div>
                   <div>
                     <h4 className="font-semibold">Safety Courses</h4>
@@ -203,11 +203,11 @@ const About = () => {
             </div>
 
             <div className="animate-fade-in">
-              <div className="bg-gray-50 p-6 rounded-lg">
+              <div className="bg-gray-50 p-6 rounded-lg card-hover hover:shadow-lg transition-all duration-300">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Government Courses Status</h3>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 hover:shadow-md transition-all duration-300">
                   <div className="flex items-center space-x-2 mb-2">
-                    <Calendar className="h-5 w-5 text-yellow-600" />
+                    <Calendar className="h-5 w-5 text-yellow-600 icon-bounce" />
                     <span className="font-semibold text-yellow-800">Currently Unavailable</span>
                   </div>
                   <p className="text-sm text-yellow-700">

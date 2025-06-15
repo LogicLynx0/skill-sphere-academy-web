@@ -1,17 +1,14 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
-import { MapPin, Phone, Mail, Clock, MessageCircle, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import FAQ from '@/components/FAQ';
+import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 
 const Contact = () => {
-  const { toast } = useToast();
-  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,70 +17,36 @@ const Contact = () => {
     message: ''
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission
+    console.log('Form submitted:', formData);
+  };
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    toast({
-      title: "Message Sent Successfully!",
-      description: "Thank you for contacting us. We'll get back to you soon.",
-    });
-
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      inquiryType: '',
-      message: ''
-    });
-
-    setIsSubmitting(false);
-  };
-
-  const handleWhatsAppClick = () => {
-    const phoneNumber = '+923001234567';
-    const message = 'Hello! I would like to get more information about Jhang Polytechnic Institute.';
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-  };
-
-  const contactInfo = [
+  const contactFAQs = [
     {
-      icon: MapPin,
-      title: 'Address',
-      details: ['Main Campus, Jhang', 'Punjab, Pakistan'],
-      color: 'text-red-500'
+      question: 'What are your office hours?',
+      answer: 'Our office is open Monday to Friday from 9:00 AM to 5:00 PM, and Saturday from 9:00 AM to 2:00 PM. We are closed on Sundays and public holidays.'
     },
     {
-      icon: Phone,
-      title: 'Phone',
-      details: ['+92-47-1234567', '+92-300-1234567'],
-      color: 'text-green-500'
+      question: 'How quickly will I receive a response to my inquiry?',
+      answer: 'We aim to respond to all inquiries within 24 hours during business days. For urgent matters, you can call us directly at +92-47-1234567.'
     },
     {
-      icon: Mail,
-      title: 'Email',
-      details: ['info@jhangpolytechnic.edu.pk', 'admissions@jhangpolytechnic.edu.pk'],
-      color: 'text-blue-500'
+      question: 'Can I visit the campus for a tour?',
+      answer: 'Yes! Campus tours are available by appointment. Please contact us in advance to schedule your visit and ensure our staff can provide you with a comprehensive tour of our facilities.'
     },
     {
-      icon: Clock,
-      title: 'Office Hours',
-      details: ['Monday - Friday: 9:00 AM - 5:00 PM', 'Saturday: 9:00 AM - 2:00 PM'],
-      color: 'text-purple-500'
+      question: 'Do you offer counseling sessions for course selection?',
+      answer: 'Absolutely! Our academic counselors are available to help you choose the right course based on your interests, career goals, and educational background. Schedule a counseling session through our contact form.'
+    },
+    {
+      question: 'Is financial assistance available?',
+      answer: 'We offer various payment plans and installment options to make education more accessible. Contact our admissions office to discuss available financial assistance programs.'
     }
   ];
 
@@ -91,38 +54,18 @@ const Contact = () => {
     <div className="min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Contact Us</h1>
+        <div className="text-center mb-16 animate-fade-in">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 gradient-text">Contact Us</h1>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Get in touch with us for any questions about our courses, admissions, or general inquiries. 
-            We're here to help you start your journey to success.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto zoom-in">
+            Get in touch with us for any questions about our courses, admissions, or to schedule a campus visit.
           </p>
         </div>
 
-        {/* Contact Information Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {contactInfo.map((info, index) => (
-            <Card key={index} className="text-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-              <CardHeader>
-                <div className={`${info.color} w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-gray-50 rounded-full`}>
-                  <info.icon className="h-6 w-6" />
-                </div>
-                <CardTitle className="text-lg">{info.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {info.details.map((detail, i) => (
-                  <p key={i} className="text-gray-600 text-sm mb-1">{detail}</p>
-                ))}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Contact Form */}
-          <div>
-            <Card>
+          <div className="animate-fade-in">
+            <Card className="card-hover hover:shadow-xl transition-all duration-300">
               <CardHeader>
                 <CardTitle className="text-2xl">Send us a Message</CardTitle>
                 <CardDescription>
@@ -133,195 +76,169 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="name">Full Name *</Label>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name *
+                      </label>
                       <Input
                         id="name"
+                        type="text"
+                        required
                         value={formData.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
                         placeholder="Enter your full name"
-                        required
+                        className="hover-glow focus:ring-2 focus:ring-primary"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="email">Email Address *</Label>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address *
+                      </label>
                       <Input
                         id="email"
                         type="email"
+                        required
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
                         placeholder="Enter your email"
-                        required
+                        className="hover-glow focus:ring-2 focus:ring-primary"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="phone">Phone Number</Label>
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                        Phone Number
+                      </label>
                       <Input
                         id="phone"
+                        type="tel"
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
                         placeholder="Enter your phone number"
+                        className="hover-glow focus:ring-2 focus:ring-primary"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="inquiryType">Inquiry Type *</Label>
+                      <label htmlFor="inquiryType" className="block text-sm font-medium text-gray-700 mb-2">
+                        Inquiry Type
+                      </label>
                       <Select value={formData.inquiryType} onValueChange={(value) => handleInputChange('inquiryType', value)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="hover-glow focus:ring-2 focus:ring-primary">
                           <SelectValue placeholder="Select inquiry type" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="general">General Information</SelectItem>
-                          <SelectItem value="admission">Admission Inquiry</SelectItem>
+                          <SelectItem value="general">General Inquiry</SelectItem>
                           <SelectItem value="courses">Course Information</SelectItem>
-                          <SelectItem value="fees">Fee Structure</SelectItem>
-                          <SelectItem value="career">Career Guidance</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
+                          <SelectItem value="admissions">Admissions</SelectItem>
+                          <SelectItem value="campus-tour">Campus Tour</SelectItem>
+                          <SelectItem value="financial">Financial Assistance</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="message">Message *</Label>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                      Message *
+                    </label>
                     <Textarea
                       id="message"
+                      required
+                      rows={4}
                       value={formData.message}
                       onChange={(e) => handleInputChange('message', e.target.value)}
-                      placeholder="Tell us how we can help you..."
-                      rows={5}
-                      required
+                      placeholder="Tell us more about your inquiry..."
+                      className="hover-glow focus:ring-2 focus:ring-primary"
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending Message...' : 'Send Message'}
+                  <Button type="submit" size="lg" className="w-full hover-glow transition-all duration-300">
+                    <Send className="h-4 w-4 mr-2" />
+                    Send Message
                   </Button>
                 </form>
               </CardContent>
             </Card>
-
-            {/* Quick Contact Options */}
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={handleWhatsAppClick}
-                className="bg-green-50 border-green-200 text-green-700 hover:bg-green-100 w-full"
-              >
-                <MessageCircle className="h-5 w-5 mr-2" />
-                WhatsApp Us
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100 w-full"
-              >
-                <a href="tel:+92471234567">
-                  <Phone className="h-5 w-5 mr-2" />
-                  Call Now
-                </a>
-              </Button>
-            </div>
           </div>
 
-          {/* Map and Additional Info */}
-          <div className="space-y-6">
-            {/* Map Placeholder */}
-            <Card>
+          {/* Contact Information */}
+          <div className="space-y-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <Card className="card-hover hover:shadow-xl transition-all duration-300">
               <CardHeader>
-                <CardTitle>Our Location</CardTitle>
-                <CardDescription>Visit our campus in Jhang, Punjab</CardDescription>
+                <CardTitle className="text-2xl">Get in Touch</CardTitle>
+                <CardDescription>
+                  Multiple ways to reach us. We're here to help!
+                </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <MapPin className="h-16 w-16 mx-auto mb-4" />
-                    <p className="font-medium">Interactive Map</p>
-                    <p className="text-sm">Jhang Polytechnic Institute</p>
-                    <p className="text-sm">Main Campus, Jhang, Punjab</p>
+              <CardContent className="space-y-6">
+                <div className="flex items-start space-x-4 group card-hover p-3 rounded-lg transition-all duration-300 hover:bg-primary/5">
+                  <div className="bg-primary/10 p-3 rounded-full group-hover:scale-110 transition-transform duration-300">
+                    <MapPin className="h-6 w-6 text-primary icon-bounce" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 group-hover:text-primary transition-colors duration-300">Address</h3>
+                    <p className="text-gray-600 group-hover:text-gray-800 transition-colors duration-300">Main Campus, Jhang, Punjab, Pakistan</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4 group card-hover p-3 rounded-lg transition-all duration-300 hover:bg-primary/5">
+                  <div className="bg-primary/10 p-3 rounded-full group-hover:scale-110 transition-transform duration-300">
+                    <Phone className="h-6 w-6 text-primary icon-bounce" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 group-hover:text-primary transition-colors duration-300">Phone</h3>
+                    <p className="text-gray-600 group-hover:text-gray-800 transition-colors duration-300">+92-47-1234567</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4 group card-hover p-3 rounded-lg transition-all duration-300 hover:bg-primary/5">
+                  <div className="bg-primary/10 p-3 rounded-full group-hover:scale-110 transition-transform duration-300">
+                    <Mail className="h-6 w-6 text-primary icon-bounce" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 group-hover:text-primary transition-colors duration-300">Email</h3>
+                    <p className="text-gray-600 group-hover:text-gray-800 transition-colors duration-300">info@jhangpolytechnic.edu.pk</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4 group card-hover p-3 rounded-lg transition-all duration-300 hover:bg-primary/5">
+                  <div className="bg-primary/10 p-3 rounded-full group-hover:scale-110 transition-transform duration-300">
+                    <Clock className="h-6 w-6 text-primary icon-bounce" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 group-hover:text-primary transition-colors duration-300">Office Hours</h3>
+                    <div className="text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
+                      <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                      <p>Saturday: 9:00 AM - 2:00 PM</p>
+                      <p>Sunday: Closed</p>
+                    </div>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Campus Information */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Campus Information</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <h4 className="font-semibold text-blue-800 mb-2">Main Campus</h4>
-                  <p className="text-sm text-blue-700 mb-2">
-                    Our main campus is located in the heart of Jhang city, easily accessible by public transport.
-                  </p>
-                  <p className="text-sm text-blue-700">
-                    <strong>Facilities:</strong> Modern labs, library, cafeteria, parking
-                  </p>
-                </div>
-                
-                <div className="bg-green-50 p-4 rounded-lg">
-                  <h4 className="font-semibold text-green-800 mb-2">Transportation</h4>
-                  <p className="text-sm text-green-700">
-                    Well-connected location with easy access to public transportation. 
-                    Free parking available for students and visitors.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Social Media */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Connect With Us</CardTitle>
-                <CardDescription>Follow us on social media for updates</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex space-x-4">
-                  <a href="#" className="bg-blue-50 p-3 rounded-full text-blue-600 hover:bg-blue-100 transition-colors">
-                    <Facebook className="h-6 w-6" />
-                  </a>
-                  <a href="#" className="bg-pink-50 p-3 rounded-full text-pink-600 hover:bg-pink-100 transition-colors">
-                    <Instagram className="h-6 w-6" />
-                  </a>
-                  <a href="#" className="bg-blue-50 p-3 rounded-full text-blue-700 hover:bg-blue-100 transition-colors">
-                    <Linkedin className="h-6 w-6" />
-                  </a>
-                  <a href="#" className="bg-sky-50 p-3 rounded-full text-sky-600 hover:bg-sky-100 transition-colors">
-                    <Twitter className="h-6 w-6" />
-                  </a>
-                </div>
-                <p className="text-sm text-gray-600 mt-4">
-                  Stay updated with the latest news, course announcements, and student achievements.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* FAQ */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Frequently Asked</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-1">What are your office hours?</h4>
-                  <p className="text-sm text-gray-600">Monday to Friday: 9:00 AM - 5:00 PM, Saturday: 9:00 AM - 2:00 PM</p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-1">How quickly do you respond?</h4>
-                  <p className="text-sm text-gray-600">We typically respond to inquiries within 24 hours during business days.</p>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900 mb-1">Can I visit the campus?</h4>
-                  <p className="text-sm text-gray-600">Yes! Campus visits are welcome. Please call ahead to schedule a tour.</p>
+            {/* Map Placeholder */}
+            <Card className="card-hover hover:shadow-xl transition-all duration-300">
+              <CardContent className="p-0">
+                <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
+                  <div className="text-center text-gray-500">
+                    <MapPin className="h-16 w-16 mx-auto mb-4 icon-bounce" />
+                    <p className="text-lg font-medium">Campus Location</p>
+                    <p className="text-sm">Interactive map coming soon</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </div>
         </div>
+
+        {/* FAQ Section */}
+        <FAQ 
+          title="Frequently Asked Questions"
+          subtitle="Quick answers to common questions about contacting us"
+          faqs={contactFAQs}
+        />
       </div>
     </div>
   );
